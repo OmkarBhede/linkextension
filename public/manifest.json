@@ -3,19 +3,28 @@
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "./popup-react/index.html",
     "default_title": "My Extension"
   },
   "icons": {
-    "128": "logo192.png"
+    "128": "./images/icon-128x128.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "scripting",
+    "nativeMessaging"
+  ],
   "content_scripts": [
     {
       "matches": ["https://www.linkedin.com/*"],
       "js": ["content.js"]
     }
   ],
+  "externally_connectable": {
+    "matches": ["https://www.linkedin.com/*"]
+  },
   "background": {
     "service_worker": "/background.js",
     "type": "module"

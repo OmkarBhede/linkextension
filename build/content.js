@@ -1,28 +1,25 @@
+console.log("content script loaded 2");
 function collectInfo() {
-  const nameEl = document.querySelector(".pv-top-card-section__name");
+  console.log("collecting info");
+  const nameEl = document.querySelector(".text-heading-xlarge");
   const emailEl = document.querySelector(
     ".pv-contact-info__contact-type.ci-email .pv-contact-info__contact-link"
   );
-  const bioEl = document.querySelector(
-    ".pv-about-section .pv-about__summary-text"
-  );
+  const bioEl = document.querySelector(".text-body-medium");
 
-  if (nameEl && emailEl && bioEl) {
-    const name = nameEl.innerText;
-    const email = emailEl.innerText;
-    const bio = bioEl.innerText;
-    const info = { name, email, bio };
-    chrome.runtime.sendMessage(info, (response) => {
-      console.log(response);
-    });
-  } else {
-    console.log("Some elements were not found on the page.");
-  }
+  const info = {
+    name: nameEl?.innerText,
+    email: emailEl?.innerText,
+    bio: bioEl?.innerText,
+  };
+  return info;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "collect-info") {
-    collectInfo();
-    sendResponse({ message: "Info collected successfully." });
+  console.log(request, "request");
+  if (request.type === "collectInfo") {
+    const info = collectInfo();
+    console.log(info, "info");
+    sendResponse({ success: true, payload: info });
   }
 });

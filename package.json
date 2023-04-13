@@ -1,46 +1,29 @@
 {
-  "name": "my-extension",
-  "version": "0.1.0",
-  "private": true,
-  "manifest_version": 3,
-  "description": "My Extension",
-  "author": "Your Name",
-  "homepage": ".",
-  "permissions": [
-    "activeTab"
-  ],
-  "content_security_policy": {
-    "extension_pages": "default-src 'self'; script-src 'self' 'unsafe-eval'; object-src 'self'"
-  },
-  "background": {
-    "service_worker": "src/background.js"
-  },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
+  "name": "linkedin-scraping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm-watch move",
+    "start-popup": "cd src/popup-react && npm run watch",
+    "start-content": "cd src/content-react && npm run watch",
+    "start-options": "cd src/options-react && npm run watch",
+    "move": "cp -r ./public/ ./build",
+    "watch-public": "npm-watch move",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-watch": "^0.11.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "watch": {
+    "move": {
+      "patterns": [
+        "public/*"
+      ],
+      "ignore": "node_modules"
+    }
   }
 }
